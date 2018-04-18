@@ -33,10 +33,9 @@ ahorranteErrante :: Evento
 
 deposito unaCantidad  = aumentarBilletera unaCantidad
 extraccion unaCantidad unUsuario = disminuirBilletera (min unaCantidad (billetera unUsuario)) unUsuario
-upgrade unUsuario | (billetera unUsuario * 0.2) < 10 = (aumentarBilletera (billetera unUsuario * 0.2) . subirDeNivel) unUsuario
-                  | otherwise = (aumentarBilletera 10.subirDeNivel) unUsuario
+upgrade unUsuario = ( aumentarBilletera (min (billetera unUsuario * 0.2) 10).subirDeNivel) unUsuario
 cierreDeCuenta = cambiarBilletera 0
-quedaIgual = aumentarBilletera 0
+quedaIgual = id
 tocoYmeVoy = (cierreDeCuenta.upgrade).deposito 15
 ahorranteErrante = deposito 10.upgrade.deposito 8.extraccion 1.deposito 2.deposito 1
 
