@@ -58,10 +58,12 @@ transaccion3 unUsuario | nombre unUsuario == "Luciano" = tocoYmeVoy unUsuario
 
 transaccion4 unUsuario | nombre unUsuario == "Luciano" = ahorranteErrante unUsuario
                        | otherwise = quedaIgual unUsuario
-
-transaccion5 unUsuario | nombre unUsuario == "Jose" = extraccion 7 unUsuario
-                       | nombre unUsuario == "Luciano" = deposito 7 unUsuario
+                       
+transaccion5 unUsuario | seLlama "Jose" unUsuario = extraccion 7 unUsuario
+                       | seLlama "Luciano" unUsuario = deposito 7 unUsuario
                        | otherwise = quedaIgual unUsuario
+
+seLlama elNombre unUsuario = (nombre unUsuario) == elNombre
 
 testeo = hspec $ do
   describe "Tests de eventos" $ do
